@@ -8,8 +8,8 @@ class InputText extends React.Component {
   };
 
   handleState({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
+    const { id, value } = target;
+    this.setState({ [id]: value });
   };
 
   render() {
@@ -17,7 +17,7 @@ class InputText extends React.Component {
     return (
       <label htmlFor={ labelName }>
         { labelName }
-        <input onChange={ this.handleState } name={ labelName } type='text' />
+        <input id={ labelName } onChange={ this.handleState } type='text' />
       </label>
     )
   }

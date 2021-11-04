@@ -10,17 +10,16 @@ class SelectMoeda extends React.Component {
   };
 
   handleState({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
+    const { id, value } = target;
+    this.setState({ [id]: value });
   };
 
   render() {
     const { moeda } = this.state;
-    console.log(moeda);
     return (
       <label htmlFor='moeda'>
         Moeda
-        <select name='moeda' onChange={ this.handleState } value={ moeda }>
+        <select id='moeda' onChange={ this.handleState } value={ moeda }>
           
         </select>
       </label>
