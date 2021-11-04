@@ -61,7 +61,7 @@ class Login extends React.Component {
           data-testid="password-input"
           placeholder='Senha...'
           type='password'
-          minlength="6"
+          minLength="6"
           required
         />
         <Link to='/carteira'>
