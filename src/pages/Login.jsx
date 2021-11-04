@@ -15,19 +15,28 @@ class Login extends React.Component {
     const { value, type } = target;
     this.setState({ [type]: value }, () => {
       const { email, password } = this.state;
-
-      const emailValid = (email) => {
-        const regex = /\S+@\S+\.+c+o+m/;
-        return regex.test(email);
-      }
-
-      if(emailValid(email)) {
-        if (password.length > 5) {
-          this.setState({ disabled: false });
-        }
+      if (this.validEmailAndPassword(email, password)) {
+        this.setState({ disabled: false });
       }
     });
+  };
+
+  emailValid(email) {
+    const regex = /\S+@\S+\.+c+o+m/;
+      return regex.test(email);
   }
+
+  validEmailAndPassword(email, password) {
+    if(this.emailValid(email)) {
+      if (password.length > 5) {
+        return true;
+      } else {
+        return false
+      };
+    } else {
+      return false
+    };
+  };
 
   render() {
     const { email, password, disabled } = this.state;
