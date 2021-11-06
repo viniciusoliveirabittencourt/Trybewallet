@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addEmail } from '../actions';
 import { Link } from 'react-router-dom';
+import { addEmail } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -11,7 +11,7 @@ class Login extends React.Component {
       email: '',
       password: '',
       disabled: true,
-    }
+    };
     this.handleInput = this.handleInput.bind(this);
   }
 
@@ -23,24 +23,23 @@ class Login extends React.Component {
         this.setState({ disabled: false });
       }
     });
-  };
+  }
 
   emailValid(email) {
     const regex = /\S+@\S+\.+c+o+m/;
-      return regex.test(email);
+    return regex.test(email);
   }
 
   validEmailAndPassword(email, password) {
-    if(this.emailValid(email)) {
-      if (password.length > 5) {
+    const MIN_LENGTH_PASSWORD = 5;
+    if (this.emailValid(email)) {
+      if (password.length > MIN_LENGTH_PASSWORD) {
         return true;
-      } else {
-        return false
-      };
-    } else {
-      return false
-    };
-  };
+      }
+      return false;
+    }
+    return false;
+  }
 
   render() {
     const { email, password, disabled } = this.state;
@@ -51,21 +50,27 @@ class Login extends React.Component {
           value={ email }
           onChange={ this.handleInput }
           data-testid="email-input"
-          placeholder='E-mail...'
-          type='email'
+          placeholder="E-mail..."
+          type="email"
           required
         />
         <input
           value={ password }
           onChange={ this.handleInput }
           data-testid="password-input"
-          placeholder='Senha...'
-          type='password'
+          placeholder="Senha..."
+          type="password"
           minLength="6"
           required
         />
-        <Link to='/carteira'>
-          <button onClick={ () => addEmailDispatch(this.state.email) } disabled={ disabled } type='button'>Entrar</button>
+        <Link to="/carteira">
+          <button
+            onClick={ () => addEmailDispatch(email) }
+            disabled={ disabled }
+            type="button"
+          >
+            Entrar
+          </button>
         </Link>
       </form>
     );
@@ -76,8 +81,8 @@ const mapDispatchToProps = (dispatch) => ({
   addEmailDispatch: (email) => dispatch(addEmail(email)),
 });
 
-Login.proptype = {
+Login.propTypes = {
   addEmailDispatch: PropTypes.func.isRequired,
-}
+};
 
 export default connect(null, mapDispatchToProps)(Login);

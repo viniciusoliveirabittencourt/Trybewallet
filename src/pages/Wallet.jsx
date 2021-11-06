@@ -11,8 +11,8 @@ class Wallet extends React.Component {
       <section>
         <Header />
         <form>
-          <InputText labelName='Valor' />
-          <InputText labelName='Descrição' />
+          <InputText labelName="Valor" />
+          <InputText labelName="Descrição" />
           <SelectMoeda />
           <SelectMetodoDePagamento />
           <SelectTagDespesa />
