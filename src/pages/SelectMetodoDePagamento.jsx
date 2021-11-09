@@ -39,7 +39,7 @@ class SelectMetodoDePagamento extends React.Component {
   }
 }
 
-SelectMetodoDePagamento.propType = {
+SelectMetodoDePagamento.propTypes = {
   enviaValue: PropTypes.func.isRequired,
 };
 

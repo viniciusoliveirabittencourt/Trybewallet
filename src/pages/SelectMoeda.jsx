@@ -7,7 +7,7 @@ class SelectMoeda extends React.Component {
   constructor() {
     super();
     this.state = {
-      moeda: 'USD',
+      moedaHtmlFor: 'USD',
       arrayMoedas: [],
     };
     this.handleState = this.handleState.bind(this);
@@ -43,11 +43,11 @@ class SelectMoeda extends React.Component {
   }
 
   render() {
-    const { moeda, arrayMoedas } = this.state;
+    const { moedaHtmlFor, arrayMoedas } = this.state;
     return (
-      <label htmlFor="moeda">
+      <label htmlFor="moedaHtmlFor">
         Moeda
-        <select id="moeda" onChange={ this.handleState } value={ moeda }>
+        <select id="moedaHtmlFor" onChange={ this.handleState } value={ moedaHtmlFor }>
           { arrayMoedas.map((element, index) => (
             <option
               key={ index }

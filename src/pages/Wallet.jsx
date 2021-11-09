@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from './Header';
 import InputText from './InputText';
@@ -35,6 +36,12 @@ class Wallet extends React.Component {
     );
   }
 }
+
+Wallet.propTypes = {
+  informacoesMoeda: PropTypes.func.isRequired,
+  numExpenses: PropTypes.arrayOf().isRequired,
+  objectInfor: PropTypes.shape().isRequired,
+};
 
 const mapStateToProps = (state) => ({
   numExpenses: state.wallet.expenses,

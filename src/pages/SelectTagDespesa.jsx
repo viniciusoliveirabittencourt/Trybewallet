@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { tag } from '../actions';
 
@@ -35,6 +36,10 @@ class SelectTagDespesa extends React.Component {
     );
   }
 }
+
+SelectTagDespesa.propTypes = {
+  enviaValue: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   enviaValue: (payload) => dispatch(tag(payload)),
