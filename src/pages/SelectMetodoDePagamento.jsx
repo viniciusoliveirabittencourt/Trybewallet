@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { method } from '../actions';
 
 class SelectMetodoDePagamento extends React.Component {
   constructor() {
@@ -11,7 +14,10 @@ class SelectMetodoDePagamento extends React.Component {
 
   handleState({ target }) {
     const { id, value } = target;
-    this.setState({ [id]: value });
+    this.setState({ [id]: value }, () => {
+      const { enviaValue } = this.props;
+      enviaValue(value);
+    });
   }
 
   render() {
@@ -24,13 +30,21 @@ class SelectMetodoDePagamento extends React.Component {
           onChange={ this.handleState }
           value={ metodoPagamento }
         >
-          <option value="dinheiro">Dinheiro</option>
-          <option value="cartaoDeCredito">Cartão de crédito</option>
-          <option value="cartaoDeDebito">Cartão de débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </label>
     );
   }
 }
 
-export default SelectMetodoDePagamento;
+SelectMetodoDePagamento.propType = {
+  enviaValue: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  enviaValue: (payload) => dispatch(method(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(SelectMetodoDePagamento);

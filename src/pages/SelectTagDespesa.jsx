@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { tag } from '../actions';
 
 class SelectTagDespesa extends React.Component {
   constructor() {
@@ -11,7 +13,10 @@ class SelectTagDespesa extends React.Component {
 
   handleState({ target }) {
     const { id, value } = target;
-    this.setState({ [id]: value });
+    this.setState({ [id]: value }, () => {
+      const { enviaValue } = this.props;
+      enviaValue(value);
+    });
   }
 
   render() {
@@ -20,15 +25,19 @@ class SelectTagDespesa extends React.Component {
       <label htmlFor="tagDespesa">
         Tag
         <select id="tagDespesa" onChange={ this.handleState } value={ tagDespesa }>
-          <option value="alimentacao">Alimentação</option>
-          <option value="lazer">Lazer</option>
-          <option value="trabalho">Trabalho</option>
-          <option value="transporte">Transporte</option>
-          <option value="saude">Saúde</option>
+          <option value="Alimentação">Alimentação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
         </select>
       </label>
     );
   }
 }
 
-export default SelectTagDespesa;
+const mapDispatchToProps = (dispatch) => ({
+  enviaValue: (payload) => dispatch(tag(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(SelectTagDespesa);

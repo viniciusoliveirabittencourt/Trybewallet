@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { moeda } from '../actions';
 
 class SelectMoeda extends React.Component {
   constructor() {
@@ -33,7 +36,10 @@ class SelectMoeda extends React.Component {
 
   handleState({ target }) {
     const { id, value } = target;
-    this.setState({ [id]: value });
+    this.setState({ [id]: value }, () => {
+      const { enviaValue } = this.props;
+      enviaValue(value);
+    });
   }
 
   render() {
@@ -55,4 +61,12 @@ class SelectMoeda extends React.Component {
   }
 }
 
-export default SelectMoeda;
+SelectMoeda.propTypes = {
+  enviaValue: PropTypes.string.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  enviaValue: (payload) => dispatch(moeda(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(SelectMoeda);

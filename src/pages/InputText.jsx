@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { typeText } from '../actions';
 
 class InputText extends React.Component {
   constructor() {
@@ -9,7 +11,10 @@ class InputText extends React.Component {
 
   handleState({ target }) {
     const { id, value } = target;
-    this.setState({ [id]: value });
+    this.setState({ [id]: value }, () => {
+      const { enviaValue, labelName } = this.props;
+      enviaValue(labelName, value);
+    });
   }
 
   render() {
@@ -25,6 +30,11 @@ class InputText extends React.Component {
 
 InputText.propTypes = {
   labelName: PropTypes.string.isRequired,
+  enviaValue: PropTypes.func.isRequired,
 };
 
-export default InputText;
+const mapDispatchToProps = (dispatch) => ({
+  enviaValue: (type, payload) => dispatch(typeText(type, payload)),
+});
+
+export default connect(null, mapDispatchToProps)(InputText);
