@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deleteItem } from '../actions';
 
 class TabelaTbody extends React.Component {
   constructor() {
@@ -30,7 +32,7 @@ class TabelaTbody extends React.Component {
       method,
       tag,
       value,
-    } } = this.props;
+    }, exclud, object } = this.props;
     return (
       <tr>
         <td>{ description }</td>
@@ -41,6 +43,15 @@ class TabelaTbody extends React.Component {
         <td>{ this.resgataNomeDaMoeda('cambioUtilizado') }</td>
         <td>{ this.resgataNomeDaMoeda('valorConvertido') }</td>
         <td>Real</td>
+        <td>
+          <button
+            onClick={ () => exclud(object) }
+            data-testid="delete-btn"
+            type="button"
+          >
+            Excluir
+          </button>
+        </td>
       </tr>
     );
   }
@@ -48,6 +59,11 @@ class TabelaTbody extends React.Component {
 
 TabelaTbody.propTypes = {
   object: PropTypes.shape(PropTypes.string.isRequired).isRequired,
+  exclud: PropTypes.func.isRequired,
 };
 
-export default TabelaTbody;
+const mapDispatchToProps = (dispatch) => ({
+  exclud: (obj) => dispatch(deleteItem(obj)),
+});
+
+export default connect(null, mapDispatchToProps)(TabelaTbody);

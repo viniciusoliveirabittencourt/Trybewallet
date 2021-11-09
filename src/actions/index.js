@@ -15,3 +15,5 @@ export function coins(object) {
     .then((r) => r.json())
     .then((r) => dispatch(exchangesTrue([{ ...object, exchangeRates: r }])));
 }
+
+export const deleteItem = (obj) => ({ type: 'DELET_ARRAY', obj });
