@@ -6,6 +6,7 @@ import InputText from './InputText';
 import SelectMoeda from './SelectMoeda';
 import SelectMetodoDePagamento from './SelectMetodoDePagamento';
 import SelectTagDespesa from './SelectTagDespesa';
+import Tabela from './Tabela';
 import { coins } from '../actions';
 
 class Wallet extends React.Component {
@@ -32,6 +33,7 @@ class Wallet extends React.Component {
           <SelectTagDespesa />
         </form>
         <button onClick={ this.onClick } type="button">Adicionar despesa</button>
+        <Tabela />
       </section>
     );
   }
